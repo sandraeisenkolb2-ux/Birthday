@@ -69,6 +69,37 @@ button:hover {
     <p id="hint" style="color:yellow;"></p>
 </div>
 
+<div id="errorLevel" style="display:none;">
+<h1 style="color:red;"> Systemfehler ❌❌❌</h1>
+<p>Zu viel Gefühle erkannt...</p>
+<p>Bitte Problem beheben.</p>
+
+<button onclick="fixError()">Problem beheben</button>
+</div>
+
+
+<div id="level4" style="display:none;">
+<h1>Letzter Test.. 😘</h1>
+<p>Dieser Button zeigt, wie ernst du die Sache nimmst...👀</p>
+
+<button id="escapeBtn" onmouseover="moveButton()">Klick mich 😉❤️</button>
+
+<p id="msg"></p>
+</div>
+
+<div id="final" style="display:none;">
+<h1>System abgeschlossen ❤️</h1>
+<p>
+Alles Gute zum 30. Geburtstag mein Schatz 🥹🎂 <br><br>
+Ich liebe dich über alles und ich bin so dankbar, dich zu haben! ❤️<br><br>
+Dein Geschenk bekommst du natürlich noch.. ❤️<br><br>
+Und da ich keine Möglichkeit hatte, dich zu überraschen, habe ich diese Seite hier für dich gebastelt ❤️ ich hoffe es ist mir gut gelungen 😋
+</p>
+</div>
+
+
+
+
 <script>
 function startProgram() {
     document.getElementById("start").style.display = "none";
@@ -104,11 +135,52 @@ function answer2(answer) {
     if(answer === "richtig") {
         document.getElementById("result2").innerText = "Natürlich 😂❤️";
         document.getElementById("hint").innerText = "";
+        
+        setTimeout(function() {
+        document.getElementById("level3").style.display= "none"; 
+        document.getElementById("errorLevel").style.display= "block";
+        }, 1000);
+        
     } else {
         document.getElementById("result2").innerText = "Nicht ganz ☺️";
         document.getElementById("hint").innerText = "Hinweis: Autobahnabfahrt Mühldorf 🚗";
+        
+        
     }
 }
+
+function fixError() {
+document.getElementById("errorLevel").style.display= "none";
+document.getElementById("level4").style.display= "block";
+}
+
+
+let moveCount = 0;
+
+function moveButton() {
+let btn = document.getElementById("escapeBtn");
+
+if (moveCount < 4) {
+let x = Math.random() * 200 - 100;
+let y = Math.random() * 200 - 100;
+
+btn.style.position = "relative";
+btn.style.left = x + "px";
+btn.style.top = y + "px";
+
+moveCount++;
+} else {
+document.getElementById("msg").innerText = "Okay okay 😂😂 jetzt darfst du klicken"; 
+btn.setAttribute("onclick","goToFinal()");
+}
+}
+
+
+function goToFinal() {
+document.getElementById("level4").style.display ="none";
+document.getElementById("final").style.display ="block";
+}
+
 </script>
 
 </body>
